@@ -21,7 +21,7 @@ const ReservationTime = ({navigation}) => {
   const isTimeAvailable = ( time) =>
     availableSlots().some(slot => slot === time);
 
-  const getBorderColor = (time) =>{
+  const getBackGroundColor = (time) =>{
     if(!isTimeAvailable(time)){
       return 'gray.500'
     }else if(
@@ -45,7 +45,7 @@ const ReservationTime = ({navigation}) => {
       <FlatList data={timeSlots} renderItem={({ item }) =>
         <Pressable
           onPress={() => updateReservationTime(item)}>
-          <Box borderWidth={1} backgroundColor={getBorderColor(item)} rounded="8" p="4" m="1" minH="20">
+          <Box borderWidth={1} backgroundColor={getBackGroundColor(item)} rounded="8" p="4" m="1" minH="20">
             {(reservationTime === item) && <Icon flex={1} size="lg" as={MaterialIcons} name="check-circle"  color={"white.500"}/>}
             <VStack alignSelf="center">
               <Text color="white" fontSize="2xl" textAlign="center"> { item } </Text>

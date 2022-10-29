@@ -5,6 +5,7 @@ import {FlatList} from "react-native";
 import {PARTY_SIZE} from "../constants/ReservationConstants";
 
 import _ from "lodash";
+import moment from "moment";
 
 const Reservations = ({ navigation }) => {
   const { reservations,
@@ -15,7 +16,7 @@ const Reservations = ({ navigation }) => {
     setStage
   } = useContext(Context);
 
-  const startNewReservation = (partySize) =>{
+  const startNewReservation = () =>{
     setPartySize(0);
     setReservationTime("");
     setGuestName("");
@@ -25,8 +26,12 @@ const Reservations = ({ navigation }) => {
   }
 
   const viewReservationDetails = (reservation) =>{
-    console.info('reservation', reservation)
     navigation.navigate('ReservationDetails', { reservationId : reservation.id})
+  }
+
+  const getSortedReservations = () =>{
+    const sorted =  reservations.sort((a, b) => moment(a.reservationTime,'hh:mm A').isAfter(moment(b.reservationTime, 'hh:mm A'))? 1 : -1);
+    return sorted;
   }
 
   return (
@@ -35,7 +40,7 @@ const Reservations = ({ navigation }) => {
         Reservations
       </Heading>
       <Box pt={4} pb={4} marginLeft="50%" color={"red-light"} >
-        <Button colorScheme="#E15B64"
+        <Button colorScheme="red"
           onPress={() => startNewReservation()}>Create</Button>
       </Box>
 
@@ -46,10 +51,10 @@ const Reservations = ({ navigation }) => {
         </HStack>
       }
 
-      <FlatList data={reservations} renderItem={({ item }) =>
+      <FlatList data={getSortedReservations()} renderItem={({ item }) =>
         <Pressable
           onPress={() => viewReservationDetails(item)}>
-          <Box borderWidth={1} borderColor="muted.800" margin="1" rounded="8" px="2" py="2">
+          <Box borderWidth={1} borderColor="grey.400" margin="1" rounded="8" px="2" py="2">
             <HStack space={[2, 3]}>
               <Text color="coolGray.800" fontSize="2xl" maxW="20%" w="20%"> {item.partySize} </Text>
               <VStack>

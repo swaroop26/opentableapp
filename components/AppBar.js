@@ -1,5 +1,4 @@
-import {View} from "react-native";
-import {Box, HStack, Icon, IconButton, StatusBar, Text} from "native-base";
+import {Box, HStack, Icon, IconButton, Text} from "native-base";
 import {MaterialIcons} from "@expo/vector-icons";
 
 const AppBar = () => (

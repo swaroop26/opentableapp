@@ -1,9 +1,8 @@
-import {Box, Button, FormControl, Heading, HStack, Input, Pressable, Stack, Text, TextArea, VStack} from "native-base";
-import {FlatList} from "react-native";
+import {Box, Button, FormControl, Heading, Input, TextArea} from "native-base";
 import {useContext, useState} from "react";
 import {Context} from "../../context/ContextProvider";
 import 'react-native-get-random-values'
-import { v4 as uuid } from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 import _ from "lodash";
 
@@ -37,7 +36,6 @@ const GuestDetails = ({props}) => {
   }
 
   const validate = () => {
-    console.info('errors', errors)
     setErrors({})
     if (!_.isEmpty(guestName) && !_.isEmpty(guestNotes)) {
       setErrors({})
