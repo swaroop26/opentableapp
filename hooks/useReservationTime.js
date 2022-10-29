@@ -11,7 +11,7 @@ const useReservationTime = () => {
     const endTime = moment().startOf('day').hours(22);
     let nextSlot = startTime;
     const times = [];
-    while (!nextSlot.isAfter(endTime)){
+    while (nextSlot.isBefore(endTime)){
       times.push(nextSlot.format('hh:mm A'));
       nextSlot = nextSlot.add(15, 'minutes');
     }
